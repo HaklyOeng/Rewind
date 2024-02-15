@@ -75,28 +75,61 @@
         <div class="row">
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
-                    <code class="language-js">
-function displayMessage() {
-    // get the text out of our input and assign it to a variable 
-    let msg = document.getElementById('message').value;
+                    <code class="language-js">                        
+                        function getValues() {
+                        
+                                // get the text input from the page
+                                let message = document.getElementById('userInput').value;
+                                // validate the input: make sure the input no empty
+                        
+                                if (message.length == 0) {
+                                    Swal.fire ({
+                                        icon: 'error',
+                                        backdrop: false,
+                                        title: 'Oops!',
+                                        text: 'Please enter a string to reverse'
+                                });
+                                } else {
+                                // pass the input to reverseMessage function and assign its return value to a variable
+                                let revMsg = reverseMessage(message);
+                                // give the reversed message to displayMessage
+                                displayMessage(revMsg);
+                        
+                                }                        
+                        }                       
+                        
+                        function reverseMessage(input) {
 
-    Swal.fire(
-        {
-            backdrop: false,
-            title: 'APP NAME',
-            text: msg,  // <-- replace this text with that variable
-         }
-    );    
-}
+                            let output = '';
+                            for (let i = input.length - 1; i >= 0; i--) {
+                                let letter = input[i];
+                                output += letter;
+                            }
+                            return output;
+                        }
+                        
+                        function displayMessage(message) {
+                            document.getElementById('msg').textContent = `Your message reversed is: ${message}`;
+                            document.getElementById('alert').classList.remove('invisible');
+                        }
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
                 <!-- Explain your code here! -->
-                <p>The code is structured in one function</p>
+                <p class="lead fs-4">The code is in three different section:</p>
+                <p class="fs-5 fw-bold lead">The first section: </p>
                 <p>
-                    <code>displayMessage</code>displays a SweetAlert when the button is pressed.
+                    <code>getValues()</code> collect the input data that the user provide.
                 </p>
+                <p class="fs-5 fw-bold lead">The second section: </p>
+                <P>
+                    <code>reverseMessage(input)</code> use the value from getValues and loop through each letter to get the input in backward order.                    
+                </P>
+                <p class="fs-5 fw-bold lead">The last section: </p>
+                <P>                    
+                    <code>displayMessage(message)</code> display the result from reverseMessage to the end user.
+                </P>
             </div>
         </div>
 
